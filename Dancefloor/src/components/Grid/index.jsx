@@ -12,25 +12,76 @@ const getRandomColor = () => {
   return `hsl(${h},${s}%,${l}%)`;
 };
 
-function Grid() {
+const getGridStyle = (row, col) => ({
+  "grid-template-row": `repeat(${row}, 1fr)`,
+  "grid-template-columns": `repeat(${col}, 1fr)`,
+});
+
+function Grid5x5() {
   const [row, col] = [5, 5];
   const getColors = () => Array.from({ length: row * col }, getRandomColor);
   const [colors, setColors] = useState(getColors());
   const [intervalID, setIntervalID] = useState();
 
-  const generateCells = () =>
+  const generateCells = (colors) =>
     colors.map((color, index) => <Cell key={index} color={color} />);
 
-  const changeColors = () => {
+  const onClickHandler = () => {
     clearInterval(intervalID);
     setIntervalID(setInterval(() => setColors(getColors()), 500));
   };
 
   return (
-    <>
-      <button onClick={changeColors}>Dance!</button>
-      <div className="grid">{generateCells()}</div>;
-    </>
+    <div>
+      <h1>Dancefloor</h1>
+      <div style={getGridStyle(row, col)} className="grid">
+        {generateCells(colors)}
+      </div>
+      <button onClick={onClickHandler}>Dance!</button>
+    </div>
   );
 }
-export default Grid;
+
+function Grid3x3() {
+  const [row, col] = [3, 3];
+  const keys = ["Q", "W", "E", "A", "S", "D", "Y", "X", "C"];
+  const initialCellStates = keys.map((key) => ({
+    id: key,
+    color: getRandomColor(),
+  }));
+  const [cellStates, setCellStates] = useState(initialCellStates);
+
+  const generateCells = (cellStates) =>
+    cellStates.map((state) => (
+      <Cell key={state.id} id={state.id} color={state.color} />
+    ));
+
+  const onKeyDownHandler = (event) => {
+    const key = event.key.toUpperCase();
+    const newCellStates = cellStates.map((state) =>
+      state.id === key
+        ? {
+            id: key,
+            color: getRandomColor(),
+          }
+        : state
+    );
+    setCellStates(newCellStates);
+  };
+
+  return (
+    <div>
+      <h1>Dancefloor by keys</h1>
+      <div
+        style={getGridStyle(row, col)}
+        className="grid"
+        onKeyDown={onKeyDownHandler}
+        tabIndex={0}
+      >
+        {generateCells(cellStates)}
+      </div>
+    </div>
+  );
+}
+
+export { Grid5x5, Grid3x3 };

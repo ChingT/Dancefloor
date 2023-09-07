@@ -1,11 +1,13 @@
 import "./App.css";
-import Grid from "./components/Grid";
+import { Grid5x5, Grid3x3 } from "./components/Grid";
 
 function App() {
   return (
     <>
-      <h1 className="App">Dancefloor</h1>
-      <Grid />
+      <div className="dancefloor">
+        <Grid5x5 />
+        <Grid3x3 />
+      </div>
     </>
   );
 }
