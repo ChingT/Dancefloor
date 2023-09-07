@@ -16,11 +16,15 @@ function Grid() {
   const [row, col] = [5, 5];
   const getColors = () => Array.from({ length: row * col }, getRandomColor);
   const [colors, setColors] = useState(getColors());
-
-  const changeColors = () => setColors(getColors());
+  const [intervalID, setIntervalID] = useState();
 
   const generateCells = () =>
     colors.map((color, index) => <Cell key={index} color={color} />);
+
+  const changeColors = () => {
+    clearInterval(intervalID);
+    setIntervalID(setInterval(() => setColors(getColors()), 500));
+  };
 
   return (
     <>
