@@ -2,7 +2,15 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  width: 50vw;
-  height: 50vw;
-  align-self: center;
+  width: 50vh;
+  height: 50vh;
+}
+
+button {
+  background-color: darkred;
+  color: white;
+  padding: 5%;
+  border: none;
+  border-radius: 20px;
+  margin: 5%;
 }

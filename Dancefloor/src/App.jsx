@@ -4,7 +4,7 @@ import Grid from "./components/Grid";
 function App() {
   return (
     <>
-      <div className="App">Dancefloor</div>
+      <h1 className="App">Dancefloor</h1>
       <Grid />
     </>
   );
