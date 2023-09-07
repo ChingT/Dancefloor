@@ -14,12 +14,19 @@ const getRandomColor = () => {
 
 function Grid() {
   const [row, col] = [5, 5];
-  const colorArray = Array.from({ length: row * col }, getRandomColor);
-  const [colors, setColors] = useState(colorArray);
+  const getColors = () => Array.from({ length: row * col }, getRandomColor);
+  const [colors, setColors] = useState(getColors());
+
+  const changeColors = () => setColors(getColors());
 
   const generateCells = () =>
     colors.map((color, index) => <Cell key={index} color={color} />);
 
-  return <div className="grid">{generateCells()}</div>;
+  return (
+    <>
+      <button onClick={changeColors}>Dance!</button>
+      <div className="grid">{generateCells()}</div>;
+    </>
+  );
 }
 export default Grid;
