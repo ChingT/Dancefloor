@@ -4,15 +4,11 @@ import Cell from "../Cell";
 function Grid() {
   const generateCells = (row = 5, col = 5) => {
     let color = "orange";
-    return Array.from({ length: row }).map((_, i) => (
-      <div key={i}>
-        {Array.from({ length: col }).map((_, j) => (
-          <Cell key={j} color={color} index={j + col * i} />
-        ))}
-      </div>
+    return Array.from({ length: row * col }).map((_, index) => (
+      <Cell key={index} color={color} index={index} />
     ));
   };
 
-  return <>{generateCells()}</>;
+  return <div className="grid">{generateCells()}</div>;
 }
 export default Grid;
