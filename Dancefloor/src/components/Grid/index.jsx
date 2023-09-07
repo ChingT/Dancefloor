@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./styles.css";
 import Cell from "../Cell";
 
@@ -12,11 +13,12 @@ const getRandomColor = () => {
 };
 
 function Grid() {
-  const generateCells = (row = 5, col = 5) => {
-    return Array.from({ length: row * col }).map((_, index) => (
-      <Cell key={index} color={getRandomColor()} />
-    ));
-  };
+  const [row, col] = [5, 5];
+  const colorArray = Array.from({ length: row * col }, getRandomColor);
+  const [colors, setColors] = useState(colorArray);
+
+  const generateCells = () =>
+    colors.map((color, index) => <Cell key={index} color={color} />);
 
   return <div className="grid">{generateCells()}</div>;
 }
