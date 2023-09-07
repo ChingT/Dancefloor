@@ -1,9 +1,13 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  width: 50vh;
-  height: 50vh;
+  grid-gap: 0;
+  width: 50vmin;
+  height: 50vmin;
+  padding: 5vmin;
+}
+
+.grid:focus {
+  background-color: pink;
 }
 
 button {
@@ -12,5 +16,5 @@ button {
   padding: 5%;
   border: none;
   border-radius: 20px;
-  margin: 5%;
+  font-size: 3vmin;
 }
